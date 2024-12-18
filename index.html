@@ -387,14 +387,15 @@
         background-color: #FFFFFF;
     }
 
+    
     .container {
         display: flex;
-        justify-content: space-between; 
-        align-items: flex-start;
-        width: 90%; 
-        max-width: 90vw; 
+        justify-content: center;
         gap: 20px;
+        flex-wrap: wrap;
         padding: 30px;
+        width: 90%;
+        max-width: 100vw;
     }
 
    .rating-box {
@@ -405,12 +406,20 @@
         border-radius: 10px;
         text-align: center;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 40vw;
+        position: relative;
     }
 
     .stars {
+        font-size: 20px;
         margin-bottom: 15px;
-        font-size: 25px; 
+        display: flex;
+        justify-content: center;
     }
+
 
     .stars span {
         color: #054708; 
@@ -439,10 +448,56 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 14px;
+        width: 100%;
     }
-
+        
     .overlay-button button:hover {
         background-color: #ff9f33;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow-y: auto; 
+        background: #FFFFFF;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        display: none;
+        z-index: 10;
+        max-width: 80vw;
+    }
+
+    .overlay.visible {
+        display: block;
+    }
+
+    .backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 5;
+        display: none;
+    }
+
+    .backdrop.visible {
+        display: block;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        color: #333;
+        background: none;
+        border: none;
+        cursor: pointer;
     }
 
     .normal-button {
@@ -544,31 +599,47 @@
         padding-top: 200px; 
     }
 
-    .background-wrapper {
-        padding: 0 10px;
-        background-image: url('backgroundimage1.jpg'); 
-        background-size: cover;
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    .project-eco img {
-        width: 24px; 
-    }
+    .container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .project-eco h2 {
-        font-size: 24px; 
-    }
-    
-    #iframe-preview {
-        display: none !important; 
-    }
+  .rating-box {
+    width: 90%; 
+  }
 
-    #preview-button {
-        font-size: 14px;
-        padding: 8px 12px;
-    }
+  .stars {
+    font-size: 18px;
+  }
+
+  .plus-button {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .quote {
+    font-size: 14px;
+  }
+
+  .overlay-button button {
+    font-size: 8px;
+    padding: 4px 5px;
+  }   
+
+  .normal-button button {
+    font-size: 8px;
+    padding: 4px 5px;
+  }
+
+  .overlay-button {
+    position: relative;
+  }
+
+  .normal-button {
+    position: relative;
+  }
 }
 
 @media (max-width: 700px) {
@@ -710,13 +781,14 @@
     </div>
     <div class="quote">
       "I'm extremely happy with the service provided by AssetFlow Automations..."
+    <div style="color: #FFFFFF;">- Money_onaires</div>
     </div>
     <div class="overlay-button">
-      <button>See Full Review</button>
+      <button onclick="openOverlay(1)">See Full Review</button>
     </div>
     <br><br><br>
     <div class="overlay-button">
-      <button onclick="window.open('https://www.trustpilot.com/money_onaires-review', '_blank')" style="background-color: #FFFFFF; color: #054708;">See Review On Trustpilot</button>
+      <button onclick="window.open('https://www.trustpilot.com/users/675e1ad5f3391f29fb905e44')" style="background-color: #FFFFFF; color: #054708;">See Review On Trustpilot</button>
     </div>
   </div>
 
@@ -726,43 +798,67 @@
         <span class="stars" style="color: transparent; -webkit-text-stroke: 1px #054708;">★★★★★</span>
     </div>
     <br>
-    <div>
+    <div class="stars"><!-- The "stars" class aligns everything in the center-->
         <h2 style="font-size: 20px;">Want your review here too?</h2>
-        <br>
+    </div>
+    <div class="stars"><!-- The "stars" class aligns everything in the center-->
         <h1 style="font-size: 20px;">Just click the button and start typing!</h1>
-        <br><br>
+    </div>
+    <div class="stars"><!-- The "stars" class aligns everything in the center-->
         <a href="https://uk.trustpilot.com/evaluate/assetflowautomations.com" target="_blank" class="plus-button">+</a>
     </div>
   </div>
 </div></center>
-<center><div class="container">
-  <!-- Left Box 2-->
-  <div class="rating-box" style="height: 400px;">
+<center>
+<div class="container">
+  <!-- Left Box -->
+  <div class="rating-box">
     <div class="lock">
-        <center><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#054708" class="padlock-icon"> 
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#054708" class="padlock-icon"> 
         <path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 5a3 3 0 0 1 6 0v3H9V7zm3 7a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" />
-        </svg></center>
+      </svg>
     </div>
-    <br><br><br>
     <div>
-        <h3>Add review to unlock this box</h3>
+      <h3>Add review to unlock this box</h3>
     </div>
   </div>
 
-  <!-- Right Box 2-->
-  <div class="rating-box" style="height: 400px;">
+  <!-- Right Box -->
+  <div class="rating-box">
     <div class="lock">
-        <center><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#054708" class="padlock-icon"> 
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#054708" class="padlock-icon"> 
         <path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 5a3 3 0 0 1 6 0v3H9V7zm3 7a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" />
-        </svg></center>
+      </svg>
     </div>
-    <br><br><br>
     <div>
-        <h3>Add review to unlock this box</h3>
+      <h3>Add review to unlock this box</h3>
     </div>
   </div>
 </div>
 </center>
+<div class="backdrop" onclick="closeOverlay()"></div>
+<div class="overlay" id="overlay-1">
+    <button class="close-btn" onclick="closeOverlay()">×</button>
+    <img src="Rating_1.png" style="width: 70vw; height: auto;">
+    <center><h3 style="font-size: 10px; color: black;">Reviewed on 15/12/24</h3></center>
+</div>
+<script>
+    function openOverlay(id) {
+        // Hide all overlays before showing the selected one
+        document.querySelectorAll(".overlay").forEach(overlay => {
+            overlay.classList.remove("visible");
+        });
+        document.getElementById(`overlay-${id}`).classList.add("visible");
+        document.querySelector(".backdrop").classList.add("visible");
+    }
+
+    function closeOverlay() {
+        document.querySelectorAll(".overlay").forEach(overlay => {
+            overlay.classList.remove("visible");
+        });
+        document.querySelector(".backdrop").classList.remove("visible");
+    }
+</script>
 <br><br><br><br>
 </body>
 
